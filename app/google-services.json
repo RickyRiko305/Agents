@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "76849447135",
+    "firebase_url": "https://agents-7ddec.firebaseio.com",
+    "project_id": "agents-7ddec",
+    "storage_bucket": "agents-7ddec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76849447135:android:fe26d6748ee05898",
+        "android_client_info": {
+          "package_name": "com.example.asus.agents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76849447135-f120f9a7oa7vofvl66l7ohrcv0p7jnko.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.asus.agents",
+            "certificate_hash": "501c162a9a855bdc1ba7157f020e283dc452c4eb"
+          }
+        },
+        {
+          "client_id": "76849447135-up7ek0c2snr606o5v0010q685j9sq1g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDI9RWwkShRH1lHVJwfgDhNGWyyWuZouDM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76849447135-up7ek0c2snr606o5v0010q685j9sq1g2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
