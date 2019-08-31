@@ -4,9 +4,9 @@ public class Items {
     private String mImageURL;
     private String mProductName;
 
-    public Items(String image, String poductName){
+    public Items(String image, String productName){
         mImageURL = image;
-        mProductName = poductName;
+        mProductName = productName;
     }
 
     public String getmImageURL(){
