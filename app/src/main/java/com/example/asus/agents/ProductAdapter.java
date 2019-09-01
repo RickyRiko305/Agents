@@ -37,9 +37,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.productName.setText(mData.get(position).getmProductName());
+        holder.productName.setText(mData.get(position).getName());
         //holder.thumbImage.setImageResource(mData.get(position).getmImageURL());
-        Picasso.get().load(mData.get(position).getmImageURL()).fit().centerInside().into(holder.thumbImage);
+        Picasso.get().load(mData.get(position).getImage()).fit().centerInside().into(holder.thumbImage);
 
     }
 
@@ -56,8 +56,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            productName = (TextView)itemView.findViewById(R.id.product_name);
-            thumbImage = (ImageView)itemView.findViewById(R.id.product_image);
+            productName = itemView.findViewById(R.id.product_name);
+            thumbImage = itemView.findViewById(R.id.product_image);
         }
     }
 }

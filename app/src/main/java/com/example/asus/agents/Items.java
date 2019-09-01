@@ -1,18 +1,20 @@
 package com.example.asus.agents;
 
 public class Items {
-    private String mImageURL;
-    private String mProductName;
+    private String Image;
+    private String name;
 
-    public Items(String image, String productName){
-        mImageURL = image;
-        mProductName = productName;
+    public Items(){}
+
+    public Items(String Image, String name){
+        this.Image = Image;
+        this.name = name;
     }
 
-    public String getmImageURL(){
-        return mImageURL;
+    public String getImage(){
+        return Image;
     }
-    public String getmProductName(){
-        return mProductName;
+    public String getName(){
+        return name;
     }
 }
