@@ -16,8 +16,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static com.example.asus.agents.MainActivity.EXTRA_NAME;
 import static com.example.asus.agents.MainActivity.EXTRA_URL;
@@ -26,6 +30,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
+    private DatabaseReference productLead;
+    private DatabaseReference userLead;
     private FirebaseDatabase firebaseDatabase;
 
     private String currentUser;
@@ -40,7 +46,9 @@ public class DetailActivity extends AppCompatActivity {
     private ProgressDialog loadingBar;
 
     customer customerDetails;
-
+    String product;
+    private long lead;
+    private long total;
 
 
     @Override
@@ -51,6 +59,7 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String imageUrl = intent.getStringExtra(EXTRA_URL);
         String productName = intent.getStringExtra(EXTRA_NAME);
+        product = intent.getStringExtra(EXTRA_NAME);
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser().getUid();
@@ -66,6 +75,8 @@ public class DetailActivity extends AppCompatActivity {
         customerAdharcard = (EditText) findViewById(R.id.txtReg);
         customerPanCard = (EditText) findViewById(R.id.txtPancard);
         send = (Button) findViewById(R.id.btnSend);
+
+        fetchlead();
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +97,42 @@ public class DetailActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void fetchlead() {
+        productLead = firebaseDatabase.getReference().child("Product").child(product).child("lead");
+
+        productLead.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long temp = (long)dataSnapshot.getValue();
+                lead = temp;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        userLead = firebaseDatabase.getReference().child("state").child("user").child(mAuth.getCurrentUser().getUid()).child("lead");
+        userLead.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    long temp = (long) dataSnapshot.getValue();
+                    total = temp;
+                }
+                else{
+                    total = 0;
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void loadData(String Name,String Email,String MobileNo,String Adhardcard,String Pancard){
@@ -112,6 +159,9 @@ public class DetailActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             loadingBar.dismiss();
                             Toast.makeText(DetailActivity.this, "Data uploaded successfully", Toast.LENGTH_SHORT).show();
+                            total = total + lead;
+                            userLead.setValue(total);
+
                         }
                         else {
                             Toast.makeText(DetailActivity.this, "error occurred", Toast.LENGTH_SHORT).show();
