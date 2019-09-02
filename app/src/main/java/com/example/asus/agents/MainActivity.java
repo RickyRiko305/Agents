@@ -19,7 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ProductAdapter.OnItemClickListener {
+
+    public static final String EXTRA_URL = "imageUrl";
+    public static final String EXTRA_NAME = "productName";
 
     private FirebaseAuth mAuth;
     private DatabaseReference rootref;
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         productRecyclerView.setHasFixedSize(true);
         productRecyclerView.setLayoutManager(gridLayoutManager);
         productRecyclerView.setAdapter(productAdapter);
+
+        productAdapter.setOnItemClickListener(MainActivity.this);
 
         fetchProducts();
 
@@ -93,5 +98,17 @@ public class MainActivity extends AppCompatActivity {
             startActivity(startIntent);
             finish();
         }
+    }
+
+    @Override
+    public void onItemClick(int postion) {
+        Intent detailIntent = new Intent(this,DetailActivity.class);
+        Items clickItem = productList.get(postion);
+
+        detailIntent.putExtra(EXTRA_URL,clickItem.getImage());
+        detailIntent.putExtra(EXTRA_NAME,clickItem.getName());
+
+        startActivity(detailIntent);
+
     }
 }
