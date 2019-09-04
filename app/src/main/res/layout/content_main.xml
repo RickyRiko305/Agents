@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <TextView
                     android:id="@+id/txtName"
                     style="@style/modifiedEditText"
                     android:hint="@string/name"
@@ -49,61 +49,37 @@
                     android:id="@+id/txtEmail"
                     style="@style/modifiedEditText"
                     android:ems="10"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress" />
+                    android:hint="new Lead value"
+                     />
 
             </android.support.design.widget.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/txtInputMob"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/txtMob"
-                    style="@style/modifiedEditText"
-                    android:hint="@string/mobno"
-                    android:inputType="phone" />
-            </android.support.design.widget.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/txtInputReg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/txtReg"
-                    style="@style/modifiedEditText"
-                    android:hint="@string/reg_no" />
-
-            </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/txtInputFeedback"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/txtPancard"
-                    style="@style/modifiedEditText"
-                    android:hint="@string/Pan_card"
-                    android:inputType="textMultiLine"
-                    android:minLines="2" />
-
-            </android.support.design.widget.TextInputLayout>
 
 
             <Button
                 android:id="@+id/btnSend"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:background="@drawable/centre_button"
+                android:text="update"
+                android:textColor="@color/whiteTextColor" />
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:background="@drawable/centre_button"
-                android:text="@string/send"
+                android:text="Delete Product"
                 android:textColor="@color/whiteTextColor" />
+
+
         </LinearLayout>
+
+
     </android.support.v7.widget.CardView>
 </android.support.v4.widget.NestedScrollView>

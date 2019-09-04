@@ -36,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private String currentUser;
 
-    private EditText customerName;
+    private TextView customerName;
     private EditText customerEmail;
     private EditText customerMobileNo;
     private EditText customerAdharcard;
@@ -65,15 +65,13 @@ public class DetailActivity extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser().getUid();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        databaseReference = firebaseDatabase.getReference().child("Product_details").child(productName).child(currentUser);
+        databaseReference = firebaseDatabase.getReference().child("Product").child(productName).child("lead");
 
         loadingBar = new ProgressDialog(this);
 
-        customerName = (EditText) findViewById(R.id.txtName);
+        customerName = (TextView) findViewById(R.id.txtName);
         customerEmail = (EditText) findViewById(R.id.txtEmail);
-        customerMobileNo = (EditText) findViewById(R.id.txtMob);
-        customerAdharcard = (EditText) findViewById(R.id.txtReg);
-        customerPanCard = (EditText) findViewById(R.id.txtPancard);
+
         send = (Button) findViewById(R.id.btnSend);
 
         fetchlead();
@@ -85,13 +83,13 @@ public class DetailActivity extends AppCompatActivity {
                     Toast.makeText(DetailActivity.this,"Please fill all the requied details", Toast.LENGTH_SHORT).show();;
                 }
                 else{
-                    String Name = customerName.getText().toString();
+                    //String Name = customerName.getText().toString();
                     String Email = customerEmail.getText().toString();
-                    String MobileNo = customerMobileNo.getText().toString();
-                    String Adhardcard = customerAdharcard.getText().toString();
-                    String Pancard = customerPanCard.getText().toString();
+//                    String MobileNo = customerMobileNo.getText().toString();
+//                    String Adhardcard = customerAdharcard.getText().toString();
+//                    String Pancard = customerPanCard.getText().toString();
 
-                    loadData(Name,Email,MobileNo,Adhardcard,Pancard);
+                    loadData(Email);
                 }
             }
         });
@@ -107,6 +105,8 @@ public class DetailActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 long temp = (long)dataSnapshot.getValue();
                 lead = temp;
+                String leadString = String.valueOf(lead);
+                customerName.setText(leadString);
             }
 
             @Override
@@ -135,15 +135,15 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
-    private void loadData(String Name,String Email,String MobileNo,String Adhardcard,String Pancard){
+    private void loadData(String Email){
 
-        customerDetails = new customer();
+        //customerDetails = new customer();
 
-        customerDetails.setName(Name);
-        customerDetails.setEmail(Email);
-        customerDetails.setMobileNo(MobileNo);
-        customerDetails.setAdharcard(Adhardcard);
-        customerDetails.setPancard(Pancard);
+        //customerDetails.setName(Name);
+        //customerDetails.setEmail(Email);
+//        customerDetails.setMobileNo(MobileNo);
+//        customerDetails.setAdharcard(Adhardcard);
+//        customerDetails.setPancard(Pancard);
 
         loadingBar.setTitle("Customer Data");
         loadingBar.setMessage("Please wait, while we are updating your customer data...");
@@ -151,16 +151,17 @@ public class DetailActivity extends AppCompatActivity {
 
         //DatabaseReference newCustomer = databaseReference.push();
         //String newCustomerKey = newCustomer.getKey();
-
-        databaseReference.push().setValue(customerDetails)
+        long Value = Integer.parseInt(Email);
+        //databaseReference.setValue(Value);
+        databaseReference.setValue(Value)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
                             loadingBar.dismiss();
                             Toast.makeText(DetailActivity.this, "Data uploaded successfully", Toast.LENGTH_SHORT).show();
-                            total = total + lead;
-                            userLead.setValue(total);
+                            //total = total + lead;
+                            //userLead.setValue(total);
 
                         }
                         else {

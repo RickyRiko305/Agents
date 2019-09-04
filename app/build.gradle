@@ -42,6 +42,7 @@ dependencies {
     //implementation 'com.google.firebase:firebase-auth:19.0.0'
     implementation 'com.google.android.gms:play-services-auth:11.0.1'
     implementation 'com.google.firebase:firebase-core:11.0.1'
+    implementation 'com.google.firebase:firebase-storage:11.0.1'
 //    implementation 'com.google.android.gms:play-services-auth:11.0.1'
 //    implementation 'com.google.firebase:firebase-core:11.0.1'
 }
