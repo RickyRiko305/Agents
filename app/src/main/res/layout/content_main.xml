@@ -58,24 +58,32 @@
 
 
 
-
-            <Button
-                android:id="@+id/btnSend"
-                android:layout_width="100dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:background="@drawable/centre_button"
-                android:text="update"
-                android:textColor="@color/whiteTextColor" />
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnDelete"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:background="@drawable/centre_button"
-                android:text="Delete Product"
-                android:textColor="@color/whiteTextColor" />
+                <Button
+                    android:id="@+id/btnSend"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/centre_button"
+                    android:text="update"
+                    android:textColor="@color/whiteTextColor" />
+
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/centre_button"
+                    android:text="Delete Product"
+                    android:textColor="@color/whiteTextColor" />
+
+
+            </RelativeLayout>
+
 
 
         </LinearLayout>

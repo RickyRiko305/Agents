@@ -79,7 +79,7 @@ public class DetailActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if((customerName==null) || (customerEmail==null) || (customerMobileNo==null) || (customerAdharcard==null) || (customerPanCard==null)){
+                if((customerEmail==null)){
                     Toast.makeText(DetailActivity.this,"Please fill all the requied details", Toast.LENGTH_SHORT).show();;
                 }
                 else{
