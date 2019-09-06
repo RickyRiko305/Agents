@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +31,19 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
 
     private FirebaseAuth mAuth;
     private DatabaseReference rootref;
+    private DatabaseReference userTotalLead;
     private RecyclerView productRecyclerView;
     private final List<Items> productList = new ArrayList<>();
     private GridLayoutManager gridLayoutManager;
     private ProductAdapter productAdapter;
 
+    private FirebaseDatabase firebaseDatabase;
+
     private Toolbar mToolbar;
+
+    private long allTimeTotal;
+
+    TextView level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +68,52 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
 
         productAdapter.setOnItemClickListener(MainActivity.this);
 
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        level = (TextView) findViewById(R.id.Level);
+
+        fetchdata();
+
+        if(allTimeTotal >= 100 && allTimeTotal < 500){
+            level.setText("Level: 1 PARTNER");
+        }
+        else if(allTimeTotal >= 500 && allTimeTotal < 1000){
+            level.setText("Level: 2 PARTNER");
+        }
+        else if(allTimeTotal >= 1000){
+            level.setText("Level: TOP PARTNER");
+        }
+        else{
+            level.setText("Level: Starter");
+        }
+
+
         fetchProducts();
 
     }
+
+    private void fetchdata() {
+        userTotalLead = firebaseDatabase.getReference().child("state").child("user").child(mAuth.getCurrentUser().getUid()).child("total_lead");
+        userTotalLead.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    long temp = (long) dataSnapshot.getValue();
+                    allTimeTotal = temp;
+                }
+                else{
+                    allTimeTotal = 0;
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     private void fetchProducts() {
 

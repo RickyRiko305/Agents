@@ -40,11 +40,24 @@
             android:layout_marginBottom="20dp">
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/txtDashboard"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="My Dashboard"
+                android:layout_alignParentLeft="true"
                 android:textColor="#ffffff"
                 android:textSize="24sp" />
+
+
+            <TextView
+                android:id="@+id/Level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Level:"
+                android:textColor="#ffffff"
+                android:textSize="12dp"/>
+
 
 
 
