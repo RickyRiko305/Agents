@@ -32,6 +32,7 @@ public class DetailActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private DatabaseReference productLead;
     private DatabaseReference userLead;
+    private DatabaseReference userTotalLead;
     private FirebaseDatabase firebaseDatabase;
 
     private String currentUser;
@@ -49,6 +50,7 @@ public class DetailActivity extends AppCompatActivity {
     String product;
     private long lead;
     private long total;
+    private long allTimeTotal;
 
 
     @Override
@@ -133,6 +135,26 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         });
+
+        userTotalLead = firebaseDatabase.getReference().child("state").child("user").child(mAuth.getCurrentUser().getUid()).child("total_lead");
+        userTotalLead.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    long temp = (long) dataSnapshot.getValue();
+                    allTimeTotal = temp;
+                }
+                else{
+                    allTimeTotal = 0;
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void loadData(String Name,String Email,String MobileNo,String Adhardcard,String Pancard){
@@ -160,7 +182,20 @@ public class DetailActivity extends AppCompatActivity {
                             loadingBar.dismiss();
                             Toast.makeText(DetailActivity.this, "Data uploaded successfully", Toast.LENGTH_SHORT).show();
                             total = total + lead;
-                            userLead.setValue(total);
+                            allTimeTotal = allTimeTotal +lead;
+                            userTotalLead.setValue(allTimeTotal);
+                            userLead.setValue(total)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Intent startIntent = new Intent(DetailActivity.this, MainActivity.class);
+                                            startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            startActivity(startIntent);
+                                            finish();
+                                        }
+                                    });
+
+
 
                         }
                         else {
