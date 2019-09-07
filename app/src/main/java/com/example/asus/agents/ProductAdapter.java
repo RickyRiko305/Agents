@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.productName.setText(mData.get(position).getName());
         //holder.thumbImage.setImageResource(mData.get(position).getmImageURL());
-        Picasso.get().load(mData.get(position).getImage()).fit().centerInside().into(holder.thumbImage);
+        Picasso.get().load(mData.get(position).getImage()).fit().centerInside().networkPolicy(NetworkPolicy.OFFLINE).into(holder.thumbImage);
 
     }
 

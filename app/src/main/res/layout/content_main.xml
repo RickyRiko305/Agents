@@ -76,7 +76,8 @@
                 <EditText
                     android:id="@+id/txtReg"
                     style="@style/modifiedEditText"
-                    android:hint="@string/reg_no" />
+                    android:inputType="number"
+                    android:hint="@string/aadhar_no" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -89,8 +90,9 @@
                 <EditText
                     android:id="@+id/txtPancard"
                     style="@style/modifiedEditText"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                    android:inputType="textCapCharacters"
                     android:hint="@string/Pan_card"
-                    android:inputType="textMultiLine"
                     android:minLines="2" />
 
             </android.support.design.widget.TextInputLayout>

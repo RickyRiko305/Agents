@@ -5,5 +5,5 @@
     <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="mobno">Mobile No.</string>
-    <string name="reg_no">Reg</string>
+    <string name="aadhar_no">Aadhar card</string>
 </resources>
