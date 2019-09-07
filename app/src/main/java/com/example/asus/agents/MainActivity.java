@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
         getSupportActionBar().setTitle("Agents");
 
         mAuth = FirebaseAuth.getInstance();
-        rootref = FirebaseDatabase.getInstance().getReference();
+        rootref = FirebaseDatabase.getInstance().getReference().child("Product");
+        rootref.keepSynced(true);
 
         productAdapter = new ProductAdapter(this,productList);
         productRecyclerView = (RecyclerView) findViewById(R.id.mainRecyclerView);
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
 
     private void fetchProducts() {
 
-        rootref.child("Product").addChildEventListener(new ChildEventListener() {
+        rootref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Items products = dataSnapshot.getValue(Items.class);
