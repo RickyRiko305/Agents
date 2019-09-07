@@ -185,6 +185,10 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
             mAuth.signOut();
             LogOutUser();
         }
+        else if(item.getItemId() == R.id.main_Account_settings_button){
+            Intent profileIntent = new Intent(this,ProfileActivity.class);
+            startActivity(profileIntent);
+        }
 
         return true;
     }
