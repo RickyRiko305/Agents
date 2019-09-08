@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
     private ProductAdapter productAdapter;
 
     private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     private Toolbar mToolbar;
 
@@ -55,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
         getSupportActionBar().setTitle("Agents");
 
         mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() == null){
+            LogOutUser();
+        }
         rootref = FirebaseDatabase.getInstance().getReference().child("Product");
         rootref.keepSynced(true);
 
@@ -73,23 +77,32 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
 
         level = (TextView) findViewById(R.id.Level);
 
-        fetchdata();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if(allTimeTotal >= 100 && allTimeTotal < 500){
-            level.setText("Level: 1 PARTNER");
-        }
-        else if(allTimeTotal >= 500 && allTimeTotal < 1000){
-            level.setText("Level: 2 PARTNER");
-        }
-        else if(allTimeTotal >= 1000){
-            level.setText("Level: TOP PARTNER");
-        }
-        else{
-            level.setText("Level: Starter");
+        if (currentUser != null){
+            databaseReference = FirebaseDatabase.getInstance().getReference().child("state").child("user").child(mAuth.getCurrentUser().getUid())
+                    .child("name");
+            databaseReference.setValue(mAuth.getCurrentUser().getEmail());
+
+            fetchdata();
+
+            if(allTimeTotal >= 100 && allTimeTotal < 500){
+                level.setText("Level: 1 PARTNER");
+            }
+            else if(allTimeTotal >= 500 && allTimeTotal < 1000){
+                level.setText("Level: 2 PARTNER");
+            }
+            else if(allTimeTotal >= 1000){
+                level.setText("Level: TOP PARTNER");
+            }
+            else{
+                level.setText("Level: Starter");
+            }
+
+            fetchProducts();
+
         }
 
-
-        fetchProducts();
 
     }
 
@@ -158,6 +171,8 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
             LogOutUser();
 
         }
+
+
     }
 
     private void LogOutUser() {
