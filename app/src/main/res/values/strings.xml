@@ -6,4 +6,6 @@
     <string name="name">Name</string>
     <string name="mobno">Mobile No.</string>
     <string name="reg_no">Reg</string>
+    <string name="delete">Delete Product</string>
+    <string name="delete_message">Are you sure you want to delete this Product from database</string>
 </resources>

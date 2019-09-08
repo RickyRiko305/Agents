@@ -105,6 +105,7 @@
                     <EditText
                         android:id="@+id/txtPassword"
                         style="@style/modifiedEditText"
+                        android:inputType="textPassword"
                         android:hint="Password"
                         android:singleLine="true" />
 

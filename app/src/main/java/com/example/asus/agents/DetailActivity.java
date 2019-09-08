@@ -1,6 +1,9 @@
 package com.example.asus.agents;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +33,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
+    private DatabaseReference targetProduct;
     private DatabaseReference productLead;
     private DatabaseReference userLead;
     private FirebaseDatabase firebaseDatabase;
@@ -42,6 +46,7 @@ public class DetailActivity extends AppCompatActivity {
     private EditText customerAdharcard;
     private EditText customerPanCard;
     private Button send;
+    private Button delete;
 
     private ProgressDialog loadingBar;
 
@@ -66,6 +71,7 @@ public class DetailActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         databaseReference = firebaseDatabase.getReference().child("Product").child(productName).child("lead");
+        targetProduct = firebaseDatabase.getReference().child("Product").child(productName);
 
         loadingBar = new ProgressDialog(this);
 
@@ -73,6 +79,7 @@ public class DetailActivity extends AppCompatActivity {
         customerEmail = (EditText) findViewById(R.id.txtEmail);
 
         send = (Button) findViewById(R.id.btnSend);
+        delete = (Button) findViewById(R.id.btnDelete);
 
         fetchlead();
 
@@ -91,6 +98,14 @@ public class DetailActivity extends AppCompatActivity {
 
                     loadData(Email);
                 }
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Confirm();
+
             }
         });
 
@@ -171,6 +186,60 @@ public class DetailActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+
+    public void Confirm() {
+//        AlertDialog dialog = new AlertDialog.Builder(context).create();
+//        dialog.setTitle("Confirmation");
+//        dialog.setMessage("Choose Yes or No");
+//        dialog.setCancelable(false);
+//        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int buttonId) {
+//                myInterface.getListener().onDialogCompleted(true);
+//            }
+//        });
+//        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int buttonId) {
+//                myInterface.getListener().onDialogCompleted(false);
+//            }
+//        });
+//        dialog.setIcon(android.R.drawable.ic_dialog_alert);
+//        dialog.show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.delete);
+        builder.setMessage(R.string.delete_message);
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteProduct();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.show();
+    }
+
+    public void deleteProduct(){
+        targetProduct.removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(DetailActivity.this,"product is deleted successfully",Toast.LENGTH_LONG).show();
+                            Intent startIntent = new Intent(DetailActivity.this, MainActivity.class);
+                            startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(startIntent);
+                            finish();
+                        }
+
+                    }
+                });
     }
 
 
