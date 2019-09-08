@@ -24,6 +24,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class StartActivity extends AppCompatActivity {
     private SignInButton googleBtn;
@@ -35,6 +37,7 @@ public class StartActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +104,7 @@ public class StartActivity extends AppCompatActivity {
             if(result.isSuccess()){
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
+
             }
         }
 
@@ -130,6 +134,10 @@ public class StartActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            databaseReference = FirebaseDatabase.getInstance().getReference().child("state").child("user").child(mAuth.getCurrentUser().getUid());
+                            databaseReference.child("name").setValue(mAuth.getCurrentUser().getEmail());
+                            databaseReference.child("lead").setValue(0);
+                            databaseReference.child("total_lead").setValue(0);
 
                         } else {
                             // If sign in fails, display a message to the user.
