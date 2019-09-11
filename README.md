@@ -13,4 +13,3 @@ The app should have 2 interface/versions one for Bank/Admin & other for Agent/Us
 
 On conversion of successful leads milestones (Like 100 leads, 500 leads, 1000 leads) the user should get Badges for Level 1 Partner, Lever 2 Partner & Top Level Partner. (Editable by Admin)
 
-On conversion of 100 successful leads milestone the user get automatic Verified Tick with his/her name(like Facebook) this milestone value for verification tick can be editable by Admin.
