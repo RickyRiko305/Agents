@@ -25,3 +25,16 @@ On conversion of 100 successful leads milestone the user get automatic Verified 
   <img src="https://user-images.githubusercontent.com/30932454/64809863-c60d4280-d5b7-11e9-9713-022201050746.png" width="324" height="584">
 
 </div>
+
+#### Admin side:
+<div>
+  <img src="https://user-images.githubusercontent.com/30932454/64810017-27351600-d5b8-11e9-9ce4-99ea04db4430.png" width="324" height="584">
+  <img src="https://user-images.githubusercontent.com/30932454/64810139-6a8f8480-d5b8-11e9-986e-f0e12598bfbb.png" width="324" height="584">
+  <br>
+  <img src="https://user-images.githubusercontent.com/30932454/64810198-927ee800-d5b8-11e9-8db6-fdaf4dd16ad8.png" width="324" height="584">
+<img src="https://user-images.githubusercontent.com/30932454/64810297-c1955980-d5b8-11e9-8cef-862b9e1a0e1b.png" width="324" height="584">
+  <br>
+  <img src="https://user-images.githubusercontent.com/30932454/64810376-eab5ea00-d5b8-11e9-89f8-10d4cc8ee5c5.png" width="324" height="584">
+  <img src="https://user-images.githubusercontent.com/30932454/64810398-f3a6bb80-d5b8-11e9-9f57-cc341a25f324.png" width="324" height="584">
+
+</div>
