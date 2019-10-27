@@ -40,3 +40,35 @@ On conversion of 100 successful leads milestone the user get automatic Verified 
   <img src="https://user-images.githubusercontent.com/30932454/64810398-f3a6bb80-d5b8-11e9-9f57-cc341a25f324.png" width="324" height="584">
 
 </div>
+
+
+### Firebase database rules:
+
+{
+  "rules":{
+  
+    "state":{
+      "user":{
+        "$uid": {        
+          ".read": "auth.uid != null ",
+          ".write": "auth.uid == $uid || auth == 'kNvEEvSDirS0t3KQpBft00TVXIY2'",
+      	}
+      }
+    },
+    "Product_details":{
+      "$ProductId" : {
+        "$uid":{
+        
+          ".read": "auth.uid == $uid",
+          ".write": "auth.uid == $uid",
+        }
+      }
+    },
+    "Product"  :{
+      
+        ".read": "auth.uid != null",
+        ".write": "auth.uid == 'kNvEEvSDirS0t3KQpBft00TVXIY2'"
+      
+    }
+  }
+}
