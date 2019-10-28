@@ -51,7 +51,7 @@ On conversion of 100 successful leads milestone the user get automatic Verified 
       "user":{
         "$uid": {        
           ".read": "auth.uid != null ",
-          ".write": "auth.uid == $uid || auth == 'kNvEEvSDirS0t3KQpBft00TVXIY2'",
+          ".write": "auth.uid == $uid || auth == 'UID'",
       	}
       }
     },
@@ -67,7 +67,7 @@ On conversion of 100 successful leads milestone the user get automatic Verified 
     "Product"  :{
       
         ".read": "auth.uid != null",
-        ".write": "auth.uid == 'kNvEEvSDirS0t3KQpBft00TVXIY2'"
+        ".write": "auth.uid == 'UID'"
       
     }
   }
